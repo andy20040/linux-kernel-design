@@ -30,7 +30,7 @@ void* benchmark(void* arg) {
     cpu_set_t cpuset;
     CPU_ZERO(&cpuset);
     CPU_SET(tid, &cpuset);
-    pthread_set_affinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset);
+    pthread_setaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset);
 
     // 2. 進行壓力測試 (模擬 PrWr)
     for (int i = 0; i < ITERATIONS; i++) {
