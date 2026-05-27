@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
-#define PRECISTION 4
+#define PRECISTION 32
 const float EXP2_LUT_FLOAT[23] = {
     1.41421356f,  // [0]: 2^(1/2)
     1.18920711f,  // [1]: 2^(1/4)
