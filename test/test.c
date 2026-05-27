@@ -27,17 +27,17 @@ const float EXP2_LUT_FLOAT[23] = {
     1.00000016f,  // [21]: 2^(1/4194304)
     1.00000008f   // [22]: 2^(1/8388608)
 };
-int log2floor(int N){
+int log2floor(uint32_t N){
     int BITS = 31;
     while (BITS) {
-    if (N & 0x80000000) break;
+    if (N & 0x80000000U) break;
     N <<= 1;
     BITS--;
     }
     return BITS;
 }
 float mylog2(int N){
-    int e=log2floor(N);
+    int e=log2floor((uint32_t)N);
     float m=(float)N/(1<<e),sum=0.f,sum_iter=0.5;
     int iter=PRECISTION,b1;
     while(iter--){
@@ -65,7 +65,7 @@ float mypow2(float x) {
             result *= EXP2_LUT_FLOAT[i]; 
         }
     }
-    result*=(1<<I);
+    result*=(float)(1U<<I);
     return result;
 }
 float geomean(int *inputs, int num){
@@ -79,7 +79,19 @@ float geomean(int *inputs, int num){
 
 
 int main(){
-    int arr[5]={1,2,3,4,5};
-    printf("geomean : %.4f\n",geomean(arr,5));
+    int arraynum;
+    printf("input array size:\n");
+    scanf("%d",&arraynum);
+    int arr[arraynum];
+    printf("input array element:\n");
+    for (int i = 0; i < arraynum; i++)
+    {
+        scanf("%d",&arr[i]);
+        if(arr[i]==0){
+            printf("geomean : 0.0000\n");
+            exit(1);
+        }
+    }
+    printf("geomean : %.4f\n", geomean(arr, arraynum));
     return 0;
 }
